@@ -144,7 +144,7 @@ class StudentProfile extends Component {
                               type='text' 
                               className='form-control' 
                               onChange={this.handleOnChange.bind(this)}
-                              value={this.state.student.student_name}
+                              // value={this.state.student.student_name}
                               name='student_name'></input>
                           </div>
                         </div>
@@ -166,7 +166,7 @@ class StudentProfile extends Component {
                               type='text' 
                               className='form-control'
                               onChange={this.handleOnChange.bind(this)}
-                              value={this.state.student.student_roll_no}
+                              // value={this.state.student.student_roll_no}
                               name='student_roll_no'></input>
                           </div>
                         </div>
@@ -177,7 +177,7 @@ class StudentProfile extends Component {
                               type='text' 
                               className='form-control'
                               onChange={this.handleOnChange.bind(this)}
-                              value={this.state.student.student_year} 
+                              // value={this.state.student.student_year} 
                               name='student_year'></input>
                           </div>
                         </div>
@@ -210,7 +210,7 @@ class StudentProfile extends Component {
                               type='text' 
                               className='form-control datepicker'
                               onChange={this.handleOnChange.bind(this)}
-                              value={this.state.student.student_date_of_birth} 
+                              // value={this.state.student.student_date_of_birth} 
                               name='student_date_of_birth'></input>
                           </div>
                         </div>
@@ -221,7 +221,7 @@ class StudentProfile extends Component {
                               type='text' 
                               className='form-control'
                               onChange={this.handleOnChange.bind(this)}
-                              value={this.state.student.student_phone} 
+                              // value={this.state.student.student_phone} 
                               name='student_phone'></input>
                           </div>
                         </div>
@@ -232,7 +232,7 @@ class StudentProfile extends Component {
                               type='text' 
                               className='form-control'
                               onChange={this.handleOnChange.bind(this)}
-                              value={this.state.student.student_address} 
+                              // value={this.state.student.student_address} 
                               name='student_address'></input>
                           </div>
                         </div>
@@ -248,7 +248,7 @@ class StudentProfile extends Component {
                               type='text' 
                               className='form-control'
                               onChange={this.handleOnChange.bind(this)}
-                              value={this.state.student.student_parent_id} 
+                              // value={this.state.student.student_parent_id} 
                               name='student_parent_id'></input>
                           </div>
                         </div>
@@ -258,7 +258,7 @@ class StudentProfile extends Component {
                             <input type='text' className='form-control'></input>
                           </div>
                         </div> */}
-                        <div className='col-xl-4 col-lg-4'>
+                        <div className='col-xl-6 col-lg-6'>
 
                           <label htmlFor="speed">Transportion</label>
                           <select name="transport" id="transport">
@@ -285,12 +285,12 @@ class StudentProfile extends Component {
             </div>
             <div className='col-xl-4 col-lg-4'>
 
-              <img width='300px' height='200px' src={'http://localhost:8000/students/getStudentImage/'+this.state.student.student_imageURL}></img>
+              {/* <img width='300px' height='200px' src={'http://localhost:8000/students/getStudentImage/'+this.state.student.student_imageURL}></img> */}
 
               <div className='card attandance-card'>
                 <div className='card-body'>
 
-                  <label htmlFor="#selectmonth">Student Attandance for </label>
+                  <label htmlFor="#selectmonth" className='mr-3'>Student Attandance for </label>
                   <select name="transport" id="selectmonth">
                     <option>Janauary</option>
                     <option>February</option>

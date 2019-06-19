@@ -3,28 +3,44 @@ import $ from 'jquery';
 import 'jquery-ui-bundle';
 import 'jquery-ui-bundle/jquery-ui.css';
 import SideNavMenu from "../../SideNavMenu";
+
+
 class AdminAddSubject extends Component {
 
     componentDidMount() {
 
-        var selectedclass;
+        var selectedclassName;
         $(document).ready(function () {
 
-            $("select.selectclass").change(function () {
-                selectedclass = $(this).children("option:selected").val();
+            $("select.selectclassName").change(function () {
+                selectedclassName = $(this).children("option:selected").val();
 
             })
 
 
             $('#save').click(function () {
 
-                if (selectedclass == null) {
-                    selectedclass = "Class A";
+                if (selectedclassName == null) {
+                    selectedclassName = "Class A";
 
                 }
-                console.log(selectedclass)
+                console.log(selectedclassName)
+                document.querySelector('.cardsave').classList.remove('invisible'); 
                 var editsubject = $('.editsubject');
-                var editsubjecthtml = "<div class='row'><div class='col-xl-4  col-lg-4 col-sm-4 container'><p style={{ paddingTop:100}}>" + selectedclass + "</p></div><div class='col-xl-4 col-lg-4 col-sm-4 container'><button class='btn btn-primary'>Edit</button></div><div class='col-xl-4 col-lg-4 col-sm-4 container'><button class='btn btn-danger'>Delete</buttton></div></div>"
+                var editsubjecthtml = " \
+                <div className='row'> \
+                <div className='col-xl-4  col-lg-4 col-sm-4'> \
+                    <p style={{ paddingTop:100}}>"
+                    + selectedclassName +  
+                    '</p> \
+                        </div> \
+                            <div className="col-xl-3 col-lg-3 col-sm-3"> \
+                                <button class="btn btn-primary">Edit</button>   \
+                            </div> \
+                            <div className="col-xl-3 col-lg-3 col-sm-3"> \
+                                <button class="btn btn-danger">Delete</buttton>\
+                            </div> \
+                        </div>'
                 editsubject.append(editsubjecthtml);
 
             })
@@ -37,7 +53,7 @@ class AdminAddSubject extends Component {
                 console.log(numofSubject);
                 for (var i = 1; i <= numofSubject; i++) {
                     var wrapper = $('.field_wrapper');
-                    var fieldHTML = '<div class="container input"><input class="col-xl-12 col-lg-12" placeholder="Enter Subject Name" type="text" name="field_name[]" value=""/></div>';
+                    var fieldHTML = ' <div class="mt-3 ml-2 input"> <div class = "input-group"> <input class = "form-control" placeholder="Enter Subject Name" type="text" name="field_name[]" value="" /><div class = "input-group-append"><button class = "btn btn-primary">Subject Name</button></div></div></div>'
                     wrapper.append(fieldHTML);
 
                 }
@@ -48,20 +64,33 @@ class AdminAddSubject extends Component {
         return (
             <div>
                 <SideNavMenu/>
-                <div class='container'>
-                    <div class='row'>
-                        <div class='col-xl-8 col-lg-8'>
-                            <div class='container'>
-                                <div class='card'>
-                                    <div class='card-body'>
-                                        <div class='row'>
-                                            <div class='col-xl-6 col-lg-6'>
-                                                <div class='container'>
-                                                    <div class='form-group'>
+                <div className='container-fluid ml-5'>
+                    <div className='row'>
+                        <div className='col-xl-8 col-lg-8'>
+                            <div className='mt-3'>
+                                <div className='card'>
+                                    <div className='card-body'>
+                                        <div className='row'>
+                                        <div className='col-xl-6 col-lg-6'>
+                                        
+                                                <div className='mt-3 ml-2'>
+                                                    <div className=' form-group '>
+                                                        <label>Select a className</label>
+                                                        <select name="className"  id="className" className='selectclassName form-control'>
+                                                            <option selected>className A</option>
+                                                            <option>className B</option>
+                                                            <option>className C</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div className='col-xl-6 col-lg-6'>
+                                                <div className='mt-3 ml-2'>
+                                                    <div className='form-group'>
 
 
                                                         <label>Selct Number of Subject</label>
-                                                        <select name="subject" class='selectNumofSubject form-control' style={{ width: 200 }} id="subject">
+                                                        <select name="subject" className='selectNumofSubject form-control'id="subject">
                                                             <option selected>1</option>
                                                             <option>2</option>
                                                             <option>3</option>
@@ -76,30 +105,24 @@ class AdminAddSubject extends Component {
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class='col-xl-6 col-lg-6'>
-                                                <div class='container'>
-                                                    <div class=' form-group '>
-                                                        <label>Select a Class</label>
-                                                        <select name="class" style={{ width: 200 }} id="class" class='selectclass form-control'>
-                                                            <option selected>Class A</option>
-                                                            <option>Class B</option>
-                                                            <option>Class C</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                        
                                         </div>
-                                        <div class='container'>
-                                            <div class='row'>
+                                        <div className='mt-3'>
+                                            <div className='row'>
 
-                                                <div class='card col-xl-12 col-lg-12'>
-                                                    <div class='card-body'>
+                                                <div className='card col-xl-12 col-lg-12'>
+                                                    <div className='card-body'>
 
-                                                        <div class="field_wrapper">
+                                                        <div className="field_wrapper">
 
-                                                            <div class='container input'>
-                                                                <input class='col-xl-12 col-lg-12' placeholder='Enter Subject Name' type="text" name="field_name[]" value="" />
+                                                            <div className='mt-3 ml-2 input'>
+                                                                <div className = "input-group">
+                                                                <input className = "form-control" placeholder='Enter Subject Name' type="text" name="field_name[]" value="" />
 
+                                                                    <div className = "input-group-append">
+                                                                        <button className = "btn btn-primary">Subject Name</button>
+                                                                    </div>
+                                                                </div>
                                                             </div>
                                                         </div>
 
@@ -108,19 +131,19 @@ class AdminAddSubject extends Component {
                                                 </div>
 
                                             </div>
-                                            <div class='container'>
-                                                <button id='save' class='btn btn-primary col-xl-12 col-lg-12'>Save</button>
+                                            <div className='mt-3'>
+                                                <button id='save' className='btn btn-primary col-xl-12 col-lg-12'>Save</button>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class='col-xl-4 col-lg-4'>
-                            <div class='container'>
-                                <div class='card'>
-                                    <div class='card-body'>
-                                        <div class='editsubject'></div>
+                        <div className='col-xl-4 col-lg-4 invisible cardsave' style={{ paddingRight:100}}>
+                            <div className='mt-3'>
+                                <div className='card'>
+                                    <div className='card-body'>
+                                        <div className='editsubject'></div>
                                     </div>
                                 </div>
                             </div>

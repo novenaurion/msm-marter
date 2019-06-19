@@ -321,14 +321,20 @@ class AdminAddStudent extends Component {
             <div className='container'>
               <img src=" " id="profile-img-tag" width='280px' height='280px'></img>
 
-              <input 
+              {/* <input 
                 type='file' 
                 name='file' 
                 placeholder='Choose Photo' 
                 id='profile-img'
                 name='imageURL'
                 onChange={this.fileChangeHandler}
-                ></input>
+                ></input> */}
+
+                <div className = "custom-file mt-3">
+                <input type = "file" name = "file" id = "profile-img" className = "custom-file-input"
+                name = 'imageURL' onChange={this.fileChangeHandler}></input>
+                <label for = "profile-img" className = "custom-file-label">Choose Photo</label>
+              </div>
 
             </div>
             </div>
