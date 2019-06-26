@@ -1,31 +1,23 @@
 import React,{Component} from 'react';
 import '../AdminCss/admintecherrecord.css';
 import {Link} from 'react-router-dom';
-import {Col} from 'react-bootstrap';
-import DataTable from 'react-data-table-component';
-import { MDBDataTable } from 'mdbreact';
 import 'styled-components/dist/styled-components';
 import SideNavbar from '../../SideNavMenu';
-
+import DataTable from 'react-data-components/lib/DataTable';
+import $ from 'jquery';
 
 
 
 
 class AdminTeacherRecord extends Component{
-
-    
-   
     constructor(props){
         super(props);
         
         this.state={
             teachers:[],
-            rows:[]
+            
         }
     }
-
-    
-    
     componentDidMount(){
         const teacher_url = "https://jsonplaceholder.typicode.com/posts";
         
@@ -38,76 +30,18 @@ class AdminTeacherRecord extends Component{
             .then((data)=>{
                 this.setState({
                     teachers : data
-                },()=>{
-                    let teachers=this.state.teachers;
-                 teachers.map((teachers)=>{
-                    this.state.rows.push({
-                        teacher_name:this.state.teachers.userId,
-                        subject_name:this.state.teachers.id,
-                        teacher_ph_no:this.state.teachers.userId
-                    })
-                 })   
-                })
-            })
+                });
+                });
+          
     }
     render() {
 
-        const data = {
-            columns: [
-              {
-                label: 'Name',
-                field: 'teacher_name',
-                sort: 'asc',
-                width: 150
-              },
-              {
-                label: 'Subject',
-                field: 'subject_name',
-                sort: 'asc',
-                width: 270
-              },
-              {
-                label: 'Phone No',
-                field: 'teacher_ph_no',
-                sort: 'asc',
-                width: 200
-              },
-              {
-                label: 'Profile',
-                field: 'teacher_profile',
-                sort: 'asc',
-                width: 100
-              },
-              {
-                label: 'Delete',
-                field: 'delete',
-                sort: 'asc',
-                width: 150
-              },
-              
-            ],
-            
-            rows: [
-                
+        let columns=[
+            {title:'Name', prop: 'title'} ,
+            {title:'Student', prop:'userId'},
+            {title:'Ggez', prop:'userId'},
+        ]
 
-                {
-                    
-                    teacher_name:this.state.teachers.userId,
-                    subject_name:this.state.teachers.id,
-                    teacher_ph_no:this.state.teachers.userId,
-                    teacher_profile:<Link to={{
-                        pathname: '/adminteacherprofile',
-                        state:this.props.original
-                    }}>
-                        
-                    </Link>
-
-                },
-            ]
-          };
-
-
-      
         // const columns = [
         //     {
         //         Header: "Name",
@@ -192,24 +126,17 @@ class AdminTeacherRecord extends Component{
            <div class='col-l-12 reacttable' >  
 
 
-           <MDBDataTable
-      striped
-      hover
-      data={data}
-    />
-
-    
-{/*            
-               <ReactTable 
-               columns={columns}
-               data={this.state.teachers}
-               filterable
-               defaultPageSize={10}
-               noDataText={'Please Wait'}
-               >
-               </ReactTable> */}
+           <DataTable
+                        keys="id"
+                        columns={columns}
+                        initialData={this.state.teachers}
+                         initialPageLength={5}
+                         initialSortBy={{ prop: 'Name', order: 'descending' }}
+                        pageLengthOptions={[ 5, 20, 50 ]}
+                       / >
+         
                </div>
-               </div>
+             </div>
              </div>
         )
     }

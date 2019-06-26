@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
-import ReactTable from 'react-table';
-import 'react-table/react-table.css';
-import '../AdminCss/adminparent.css';
 import { Link } from 'react-router-dom';
 import SideNav from "../../SideNavMenu";
+import $ from 'jquery';
+import DataTable from 'react-data-components/lib/DataTable';
+import 'react-data-components/css/table-twbs.css';
 
 class AdminParent extends Component {
-    constructor(props) {
-        super(props);
+    constructor( ) {
+
+        super( );
 
         this.state = {
             parents: []
@@ -15,12 +16,19 @@ class AdminParent extends Component {
     }
 
     componentDidMount() {
+
+
         const url = "https://jsonplaceholder.typicode.com/posts";
         fetch(url, {
             method: "GET"
-        }).then(res => res.json()).then(parents => {
-            this.setState({ parents: parents })
-        })
+        }).then(res => res.json()).then(parent => {
+            this.setState({ 
+                parents: parent
+             })
+            
+        });
+
+       
     }
 
     onDelEvent(id) {
@@ -32,99 +40,47 @@ class AdminParent extends Component {
     }
 
     render() {
-
-        const columns = [
-            {
-                Header: "No",
-                accessor: "userId",
-                Filter: ({ filter, onChange }) => (
-                    <input placeholder="Search User"
-                        onChange={event => onChange(event.target.value)}
-                        value={filter ? filter.value : ''}
-                    />
-                ),
-            },
-            {
-                Header: "Name",
-                accessor: "id",
-                filterable: true,
-                Filter: ({ filter, onChange }) => (
-                    <input placeholder="Search name"
-                        onChange={event => onChange(event.target.value)}
-                        value={filter ? filter.value : ''}
-                    />
-                ),
-
-            },
-            {
-                Header: "Student Name",
-                accessor: "title",
-                Filter: ({ filter, onChange }) => (
-                    <input placeholder="Search Father Name"
-                        onChange={event => onChange(event.target.value)}
-                        value={filter ? filter.value : ''}
-                    />
-                ),
-            },
-            {
-                Header: "Student Profile",
-                Cell: props => {
-                    return (
-                        <button class='btn btn-primary'>See Profile</button>
-                    )
-                },
-                style: {
-                    textAlign: 'center'
-                },
-                width: 150,
-                filterable: false
-            },
-            {
-                Header: 'Delete',
-                Cell: props => {
-                    return (
-                        <button class='btn btn-danger' onClick={() => {
-                            this.onDelEvent(props.original.id)
-                        }}>Delete</button>
-                    )
-                },
-                style: {
-                    textAlign: 'center'
-                },
-                width: 150,
-                filterable: false
-            }
+        
+       
+        let columns=[
+            {title:'Name', prop: 'title'} ,
+            {title:'Student', prop:'userId'},
+            {title:'Ggez', prop:'userId'},
         ]
+               
         return (
             <div>
-                <SideNav/>
-                <div style={{paddingTop:'40px',paddingLeft:'60px',paddingRight:'20px'}}>
-             <div class='row '>
-                <div class='col-xl-8'>
-                    <p class='text' >Guardian Records</p>
-                </div>
+                <SideNav />
+                <div style={{ paddingTop: '40px', paddingLeft: '60px', paddingRight: '20px' }}>
+                    <div className='row'>
+                        <div className='col-xl-8'>
+                            <p className='text' >Guardian Records</p>
+                        </div>
 
-                <div class='col-xl-4' > 
-                <div style={{textAlign:'right',paddingRight:'10px', paddingTop:'10px' }}>
-                  <Link to='adminaddparent'>  
-                  <button class='btn btn-primary' >Add Guardian</button></Link>
-                </div>
-                </div>
-                </div>
-                <div class='col-l-12 reacttable' >
+                        <div className='col-xl-4 d-flex justify-content-md-start justify-content-xl-end' >
+                            
+                                <Link to='adminaddparent'>
+                                    <button className='btn btn-primary'>Add Guardian</button></Link>
+                            
+                        </div>
+                    </div>
+                    <div className='col-xl-12 reacttable'>
+                    <DataTable
+                        keys="id"
+                        columns={columns}
+                        initialData={this.state.parents}
+                         initialPageLength={5}
+                         initialSortBy={{ prop: 'Name', order: 'descending' }}
+                        pageLengthOptions={[ 5, 20, 50 ]}
+                       / >
+                            
+                            
+    
+                   
+                    </div>
 
-<ReactTable
-    columns={columns}
-    data={this.state.parents}
-    filterable
-    defaultPageSize={10}
-    noDataText={'Please Wait'}
->
-</ReactTable>
-</div>
-
                 </div>
-             </div>
+            </div>
 
         )
 
